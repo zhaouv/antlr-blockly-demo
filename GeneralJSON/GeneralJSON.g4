@@ -2,16 +2,36 @@ grammar GeneralJSON;
 
 top: v=json;
 
-jpairorempty : jpair | 'emtpy object' #jpairempty
-/* jpairempty
-color:70
-*/;
+jpairorempty 
+    : jpair 
+    | k=Evalstr? ':' 'string' v=NormalStr? #jpairstring
+/* jpairstring
+defaultMap:{k:'',v:''}
+*/
+    | k=Evalstr? ':' 'number' v=Evalstr #jpairnumber
+/* jpairnumber
+defaultMap:{k:'',v:'0'}
+*/
+    | 'emtpy object' #jpairempty
+;
+
 jpair : k=Evalstr? ':' v=json
 /* jpair
-color:70
 defaultMap:{k:''}
 */;
-jelementorempty : jelement | 'empty array' #jelementempty;
+
+jelementorempty 
+    : jelement 
+    | 'string' v=NormalStr? #jelementstring
+/* jelementstring
+defaultMap:{v:''}
+*/
+    | 'number' v=Evalstr #jelementnumber
+/* jelementnumber
+defaultMap:{v:''}
+*/
+    | 'empty array' #jelementempty
+;
 jelement : v=json;
 
 statExprSplit : '=== statement ^ === expression v ===' ;
@@ -27,8 +47,14 @@ json
     |   jnull
     ;
 
-jfix1 : '一个固化的json例子' BGNL k=Evalstr BGNL a=Evalstr BGNL v=json;
-jfix2 : '另一个固化的json例子' BGNL k=Evalstr BGNL a=Evalstr BGNL v=json;
+jfix1 : '一个固化的json例子' BGNL k=Evalstr BGNL a=Evalstr BGNL v=json
+/* jfix1
+defaultMap:{k:'0',a:'1'}
+*/;
+jfix2 : '另一个固化的json例子' BGNL k=Evalstr BGNL a=Evalstr BGNL v=json
+/* jfix2
+defaultMap:{k:'2',a:'4'}
+*/;
 
 jobject : 'object' v=jpairorempty+;
 
@@ -111,8 +137,12 @@ GeneralJSONFunctions.TryIntStr_pre = function(str) {
     return str;
 }
 
-// GeneralJSONBlocks.shapes.forEach(blockname => {
-//     GeneralJSONBlocks[blockname].json.nextStatement=undefined
-// })
+GeneralJSONBlocks.jpairorempty.forEach(blockname => {
+    GeneralJSONBlocks[blockname].json.colour=70
+})
+
+GeneralJSONBlocks.jelementorempty.forEach(blockname => {
+    GeneralJSONBlocks[blockname].json.colour=100
+})
 
 */

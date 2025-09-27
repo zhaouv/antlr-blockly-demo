@@ -3,10 +3,14 @@
 GeneralJSONBlocks = {
     "jpairorempty": [
         "jpair",
+        "jpairstring",
+        "jpairnumber",
         "jpairempty"
     ],
     "jelementorempty": [
         "jelement",
+        "jelementstring",
+        "jelementnumber",
         "jelementempty"
     ],
     "json": [
@@ -108,6 +112,95 @@ Object.assign(GeneralJSONBlocks,{
             return GeneralJSONFunctions.xmlText('top',inputs,next,isShadow,comment,attribute);
         }
     },
+    "jpairstring": {
+        "type": "statement",
+        "json": {
+            "type": "jpairstring",
+            "message0": "%1 : string %2",
+            "args0": [
+                Object.assign({},GeneralJSONBlocks.Evalstr,{
+                    "name": "k",
+                    "text": ""
+                }),
+                Object.assign({},GeneralJSONBlocks.NormalStr,{
+                    "name": "v",
+                    "text": ""
+                })
+            ],
+            "inputsInline": true,
+            "tooltip": "",
+            "helpUrl": "",
+            "colour": 300,
+            "previousStatement": "jpairstring",
+            "nextStatement": GeneralJSONBlocks.jpairorempty
+        },
+        "generFunc": function(block) {
+            var k = block.getFieldValue('k');
+            k = GeneralJSONFunctions.pre('Evalstr')(k,block,'k','jpairstring');
+            var v = block.getFieldValue('v');
+            v = GeneralJSONFunctions.pre('NormalStr')(v,block,'v','jpairstring');
+            var code = GeneralJSONFunctions.defaultCode('jpairstring',eval('['+GeneralJSONBlocks['jpairstring'].args.join(',')+']'),block);
+            return code;
+        },
+        "args": ["k","v"],
+        "argsType": ["field","field"],
+        "argsGrammarName": ["Evalstr","NormalStr"],
+        "omitted": [true,true],
+        "multi": [false,false],
+        "fieldDefault": function (keyOrIndex) {
+            return GeneralJSONFunctions.fieldDefault('jpairstring',keyOrIndex);
+        },
+        "menu": [],
+        "xmlText": function (inputs,next,isShadow,comment,attribute) {
+            return GeneralJSONFunctions.xmlText('jpairstring',inputs,next,isShadow,comment,attribute);
+        }
+    },
+    "jpairnumber": {
+        "type": "statement",
+        "json": {
+            "type": "jpairnumber",
+            "message0": "%1 : number %2",
+            "args0": [
+                Object.assign({},GeneralJSONBlocks.Evalstr,{
+                    "name": "k",
+                    "text": ""
+                }),
+                Object.assign({},GeneralJSONBlocks.Evalstr,{
+                    "name": "v",
+                    "text": "0"
+                })
+            ],
+            "inputsInline": true,
+            "tooltip": "",
+            "helpUrl": "",
+            "colour": 300,
+            "previousStatement": "jpairnumber",
+            "nextStatement": GeneralJSONBlocks.jpairorempty
+        },
+        "generFunc": function(block) {
+            var k = block.getFieldValue('k');
+            k = GeneralJSONFunctions.pre('Evalstr')(k,block,'k','jpairnumber');
+            var v = block.getFieldValue('v');
+            if (v==='') {
+                throw new OmitedError(block,'v','jpairnumber');
+            }
+            v = GeneralJSONFunctions.pre('Evalstr')(v,block,'v','jpairnumber');
+            var code = GeneralJSONFunctions.defaultCode('jpairnumber',eval('['+GeneralJSONBlocks['jpairnumber'].args.join(',')+']'),block);
+            return code;
+        },
+        "args": ["k","v"],
+        "argsType": ["field","field"],
+        "argsGrammarName": ["Evalstr","Evalstr"],
+        "omitted": [true,false],
+        "multi": [false,false],
+        "fieldDefault": function (keyOrIndex) {
+            return GeneralJSONFunctions.fieldDefault('jpairnumber',keyOrIndex);
+        },
+        "menu": [],
+        "xmlText": function (inputs,next,isShadow,comment,attribute) {
+            return GeneralJSONFunctions.xmlText('jpairnumber',inputs,next,isShadow,comment,attribute);
+        }
+    },
     "jpairempty": {
         "type": "statement",
         "json": {
@@ -117,7 +210,7 @@ Object.assign(GeneralJSONBlocks,{
             "inputsInline": true,
             "tooltip": "",
             "helpUrl": "",
-            "colour": 70,
+            "colour": 300,
             "previousStatement": "jpairempty",
             "nextStatement": GeneralJSONBlocks.jpairorempty
         },
@@ -156,7 +249,7 @@ Object.assign(GeneralJSONBlocks,{
             ],
             "tooltip": "",
             "helpUrl": "",
-            "colour": 70,
+            "colour": 300,
             "previousStatement": "jpair",
             "nextStatement": GeneralJSONBlocks.jpairorempty
         },
@@ -182,6 +275,83 @@ Object.assign(GeneralJSONBlocks,{
         "menu": [],
         "xmlText": function (inputs,next,isShadow,comment,attribute) {
             return GeneralJSONFunctions.xmlText('jpair',inputs,next,isShadow,comment,attribute);
+        }
+    },
+    "jelementstring": {
+        "type": "statement",
+        "json": {
+            "type": "jelementstring",
+            "message0": "string %1",
+            "args0": [
+                Object.assign({},GeneralJSONBlocks.NormalStr,{
+                    "name": "v",
+                    "text": ""
+                })
+            ],
+            "inputsInline": true,
+            "tooltip": "",
+            "helpUrl": "",
+            "colour": 300,
+            "previousStatement": "jelementstring",
+            "nextStatement": GeneralJSONBlocks.jelementorempty
+        },
+        "generFunc": function(block) {
+            var v = block.getFieldValue('v');
+            v = GeneralJSONFunctions.pre('NormalStr')(v,block,'v','jelementstring');
+            var code = GeneralJSONFunctions.defaultCode('jelementstring',eval('['+GeneralJSONBlocks['jelementstring'].args.join(',')+']'),block);
+            return code;
+        },
+        "args": ["v"],
+        "argsType": ["field"],
+        "argsGrammarName": ["NormalStr"],
+        "omitted": [true],
+        "multi": [false],
+        "fieldDefault": function (keyOrIndex) {
+            return GeneralJSONFunctions.fieldDefault('jelementstring',keyOrIndex);
+        },
+        "menu": [],
+        "xmlText": function (inputs,next,isShadow,comment,attribute) {
+            return GeneralJSONFunctions.xmlText('jelementstring',inputs,next,isShadow,comment,attribute);
+        }
+    },
+    "jelementnumber": {
+        "type": "statement",
+        "json": {
+            "type": "jelementnumber",
+            "message0": "number %1",
+            "args0": [
+                Object.assign({},GeneralJSONBlocks.Evalstr,{
+                    "name": "v",
+                    "text": ""
+                })
+            ],
+            "inputsInline": true,
+            "tooltip": "",
+            "helpUrl": "",
+            "colour": 300,
+            "previousStatement": "jelementnumber",
+            "nextStatement": GeneralJSONBlocks.jelementorempty
+        },
+        "generFunc": function(block) {
+            var v = block.getFieldValue('v');
+            if (v==='') {
+                throw new OmitedError(block,'v','jelementnumber');
+            }
+            v = GeneralJSONFunctions.pre('Evalstr')(v,block,'v','jelementnumber');
+            var code = GeneralJSONFunctions.defaultCode('jelementnumber',eval('['+GeneralJSONBlocks['jelementnumber'].args.join(',')+']'),block);
+            return code;
+        },
+        "args": ["v"],
+        "argsType": ["field"],
+        "argsGrammarName": ["Evalstr"],
+        "omitted": [false],
+        "multi": [false],
+        "fieldDefault": function (keyOrIndex) {
+            return GeneralJSONFunctions.fieldDefault('jelementnumber',keyOrIndex);
+        },
+        "menu": [],
+        "xmlText": function (inputs,next,isShadow,comment,attribute) {
+            return GeneralJSONFunctions.xmlText('jelementnumber',inputs,next,isShadow,comment,attribute);
         }
     },
     "jelementempty": {
@@ -264,13 +434,15 @@ Object.assign(GeneralJSONBlocks,{
                     "type": "input_dummy"
                 },
                 Object.assign({},GeneralJSONBlocks.Evalstr,{
-                    "name": "k"
+                    "name": "k",
+                    "text": "0"
                 }),
                 {
                     "type": "input_dummy"
                 },
                 Object.assign({},GeneralJSONBlocks.Evalstr,{
-                    "name": "a"
+                    "name": "a",
+                    "text": "1"
                 }),
                 {
                     "type": "input_dummy"
@@ -328,13 +500,15 @@ Object.assign(GeneralJSONBlocks,{
                     "type": "input_dummy"
                 },
                 Object.assign({},GeneralJSONBlocks.Evalstr,{
-                    "name": "k"
+                    "name": "k",
+                    "text": "2"
                 }),
                 {
                     "type": "input_dummy"
                 },
                 Object.assign({},GeneralJSONBlocks.Evalstr,{
-                    "name": "a"
+                    "name": "a",
+                    "text": "4"
                 }),
                 {
                     "type": "input_dummy"
@@ -659,9 +833,13 @@ GeneralJSONFunctions.TryIntStr_pre = function(str) {
     return str;
 }
 
-// GeneralJSONBlocks.shapes.forEach(blockname => {
-//     GeneralJSONBlocks[blockname].json.nextStatement=undefined
-// })
+GeneralJSONBlocks.jpairorempty.forEach(blockname => {
+    GeneralJSONBlocks[blockname].json.colour=70
+})
+
+GeneralJSONBlocks.jelementorempty.forEach(blockname => {
+    GeneralJSONBlocks[blockname].json.colour=100
+})
 GeneralJSONFunctions.Int_pre = function(intstr) {
     return parseInt(intstr);
 }
@@ -935,8 +1113,12 @@ var toolbox = (function(){
         "statement": [
             // 所有语句块
             GeneralJSONBlocks["top"].xmlText(),
+            GeneralJSONBlocks["jpairstring"].xmlText(),
+            GeneralJSONBlocks["jpairnumber"].xmlText(),
             GeneralJSONBlocks["jpairempty"].xmlText(),
             GeneralJSONBlocks["jpair"].xmlText(),
+            GeneralJSONBlocks["jelementstring"].xmlText(),
+            GeneralJSONBlocks["jelementnumber"].xmlText(),
             GeneralJSONBlocks["jelementempty"].xmlText(),
             GeneralJSONBlocks["jelement"].xmlText(),
         ],
