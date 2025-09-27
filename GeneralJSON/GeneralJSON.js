@@ -322,7 +322,7 @@ Object.assign(GeneralJSONBlocks,{
             "args0": [
                 Object.assign({},GeneralJSONBlocks.Evalstr,{
                     "name": "v",
-                    "text": ""
+                    "text": "0"
                 })
             ],
             "inputsInline": true,

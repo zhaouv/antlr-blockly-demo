@@ -28,7 +28,7 @@ defaultMap:{v:''}
 */
     | 'number' v=Evalstr #jelementnumber
 /* jelementnumber
-defaultMap:{v:''}
+defaultMap:{v:'0'}
 */
     | 'empty array' #jelementempty
 ;
